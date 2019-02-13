@@ -11,18 +11,64 @@ namespace Vidly.Controllers
     {
         // GET: Movies/Random
         // page with string (with layout)
+        // this is the clean way to push data to a view
         public ActionResult Random()
         {
-
-            string movies = "Bees,Shrek,Batman,Superman,Ironman";
-            string[] randomMovies = movies.Split(',');
-            Random rnd = new Random();
-            int index = rnd.Next(0,randomMovies.Count());
-            string name = randomMovies[index];
+            string name = GetARandomMovieName();
 
             Movie movie = new Movie() { Name = name };
 
+            // you don't have to manually add it here
+            // View() will take care of it
+            //ViewResult viewResult = new ViewResult();
+            //viewResult.ViewData.Model = movie;
+
             return View(movie);
+        }
+
+        // GET: Movies/Random
+        // page with string (with layout)
+        // this is the ugly way (using ViewBag)
+        public ActionResult RandomUgly()
+        {
+            string name = GetARandomMovieName();
+
+
+            Movie movie = new Movie() { Name = name };
+
+            // issues:
+            // lacks compile time safety
+            // casting issues
+            ViewBag.Movie = movie;
+
+            return View();
+        }
+
+        // GET: Movies/Random
+        // page with string (with layout)
+        // this is the dirty way to push data to a view (using ViewData)
+        public ActionResult RandomDirty()
+        {
+            string name = GetARandomMovieName();
+
+            Movie movie = new Movie() { Name = name };
+
+            // issues:
+            // Hardcoding strings
+            // casting issues
+            ViewData["Movie"] = movie;
+
+            return View();
+        }
+
+        private static string GetARandomMovieName()
+        {
+            string movies = "Bees,Shrek,Batman,Superman,Ironman";
+            string[] randomMovies = movies.Split(',');
+            Random rnd = new Random();
+            int index = rnd.Next(0, randomMovies.Count());
+            string name = randomMovies[index];
+            return name;
         }
 
         // GET: Movies/Edit/1

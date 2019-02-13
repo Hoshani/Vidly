@@ -1,0 +1,18 @@
+﻿@using Vidly.Models;
+@model Vidly.Models.Movie
+@{
+    ViewBag.Title = "RandomDirty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@( ((Movie)ViewData["Movie"]).Name )</h2>
+
+@*
+    THIS IS DONE FOR DEMONSTRATION PURPOSES
+    PLEASE DON'T DO IT AS IT IS NOT A CLEAN
+    WAY TO HANDLE DATA ACROSS PAGES
+
+    -- WHY?
+    BECAUSE WE ARE BASICALLY HARDCODING DATA
+    EXAMPLE: ViewData["Movie"]
+*@
