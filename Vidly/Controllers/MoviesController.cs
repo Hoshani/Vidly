@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -18,12 +19,37 @@ namespace Vidly.Controllers
 
             Movie movie = new Movie() { Name = name };
 
-            // you don't have to manually add it here
+            // you don't have to manually add it here if using only one model
             // View() will take care of it
             //ViewResult viewResult = new ViewResult();
             //viewResult.ViewData.Model = movie;
 
             return View(movie);
+        }
+
+        // GET: Movies/Random
+        // page with string (with layout)
+        // this is the clean way to push data to a view
+        // from multiple models to one view
+        public ActionResult RandomViewModel()
+        {
+            string name = GetARandomMovieName();
+
+            Movie movie = new Movie() { Name = name };
+            List<Customer> customers = new List<Customer>
+            {
+                new Customer{Name = "customer 1"},
+                new Customer{Name = "customer 2"},
+                new Customer{Name = "customer 3"}
+            };
+
+            RandomMovieViewModel randomMovieViewModel = new RandomMovieViewModel()
+            {
+                Movie = movie,
+                Customers = customers
+            };
+
+            return View(randomMovieViewModel);
         }
 
         // GET: Movies/Random
