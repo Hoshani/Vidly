@@ -10,6 +10,34 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
+        public List<Movie> movies = new List<Movie>
+            {
+                new Movie {Id = 1, Name = "Bees" },
+                new Movie {Id = 2, Name = "Shrek" },
+                new Movie {Id = 3, Name = "BatMan" },
+                new Movie {Id = 4, Name = "IronMan" },
+                new Movie {Id = 5, Name = "SpiderMan" },
+                new Movie {Id = 6, Name = "AntMan" },
+                new Movie {Id = 7, Name = "SuperMan" }
+            };
+
+        // GET: Movies
+        public ActionResult Index()
+        {
+            MovieViewModel movieViewModel = new MovieViewModel
+            {
+                Movies = movies
+            };
+
+            return View(movieViewModel);
+        }
+
+        // GET: Movies/Details
+        public ActionResult Details(int id)
+        {
+            return View(movies[id]);
+        }
+
         // GET: Movies/Random
         // page with string (with layout)
         // this is the clean way to push data to a view
@@ -87,13 +115,11 @@ namespace Vidly.Controllers
             return View();
         }
 
-        private static string GetARandomMovieName()
+        private string GetARandomMovieName()
         {
-            string movies = "Bees,Shrek,Batman,Superman,Ironman";
-            string[] randomMovies = movies.Split(',');
             Random rnd = new Random();
-            int index = rnd.Next(0, randomMovies.Count());
-            string name = randomMovies[index];
+            int index = rnd.Next(0, movies.Count());
+            string name = movies[index].Name;
             return name;
         }
 
@@ -109,6 +135,7 @@ namespace Vidly.Controllers
         // GET: Movies/Index
         // GET: Movies/Index?pageindex=1&sortby=name
         // testing parameters
+        [Route("Movies/Index/{pageIndex}/{sortBy}")]
         public ActionResult Index(int? pageIndex, string sortBy)
         {
             if (!pageIndex.HasValue)
