@@ -44,13 +44,6 @@ namespace Vidly.Controllers
         {
             List<Customer> customers = _context.Customers.Include(c => c.MembershipType).ToList();
             return customers;
-            //new List<Customer>
-            //{
-            //    new Customer {Id = 1 ,Name = "John Smith"},
-            //    new Customer {Id = 2 ,Name = "John Doe"},
-            //    new Customer {Id = 3 ,Name = "Jane Doe"}
-            //
-            //};
         }
     }
 }

@@ -11,32 +11,35 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-        public List<Movie> movies = new List<Movie>
-            {
-                new Movie {Id = 1, Name = "Bees" },
-                new Movie {Id = 2, Name = "Shrek" },
-                new Movie {Id = 3, Name = "BatMan" },
-                new Movie {Id = 4, Name = "IronMan" },
-                new Movie {Id = 5, Name = "SpiderMan" },
-                new Movie {Id = 6, Name = "AntMan" },
-                new Movie {Id = 7, Name = "SuperMan" }
-            };
+        private ApplicationDbContext _context;
+
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _context.Dispose();
+        }
+
+        private List<Movie> GetMovies()
+        {
+            return _context.Movies.Include(m => m.MovieGenre).ToList();
+        }
+
 
         // GET: Movies
         public ActionResult Index()
         {
-            MovieViewModel movieViewModel = new MovieViewModel
-            {
-                Movies = movies
-            };
-
-            return View(movieViewModel);
+            return View(GetMovies());
         }
 
         // GET: Movies/Details
         public ActionResult Details(int id)
         {
-            return View(movies[id]);
+            return View(GetMovies()[id-1]);
         }
 
         // GET: Movies/Random
@@ -119,6 +122,7 @@ namespace Vidly.Controllers
         private string GetARandomMovieName()
         {
             Random rnd = new Random();
+            List<Movie> movies = GetMovies();
             int index = rnd.Next(0, movies.Count());
             string name = movies[index].Name;
             return name;

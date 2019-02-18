@@ -1,5 +1,5 @@
 ﻿@using Vidly.Models
-@model Vidly.ViewModels.MovieViewModel
+@model List<Vidly.Models.Movie>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +8,7 @@
 <h2>Movies</h2>
 
 @{
-    bool isThereMovies = Model.Movies.Count > 0;
+    bool isThereMovies = Model.Any();
     string classes = isThereMovies ? "table table-bordered table-hover" : null;
 }
 
@@ -22,12 +22,14 @@ else
         <tr>
             <th>ID</th>
             <th>Movie Name</th>
+            <th>Genre</th>
         </tr>
-        @foreach (Movie movie in Model.Movies)
+        @foreach (Movie movie in Model)
         {
             <tr>
                 <td>@movie.Id</td>
                 <td>@Html.ActionLink(movie.Name, string.Format("Details/{0}", movie.Id), "Movies")</td>
+                <td>@movie.MovieGenre.Name</td>
             </tr>
         }
     </table>

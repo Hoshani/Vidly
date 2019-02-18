@@ -1,5 +1,5 @@
 ﻿@using Vidly.Models;
-@model  List<Vidly.Models.Customer>
+@model List<Vidly.Models.Customer>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -29,7 +29,7 @@ else
             <tr>
                 <td>@customer.Id</td>
                 <td>@Html.ActionLink(customer.Name, string.Format("Details/{0}", customer.Id), "Customer")</td>
-                <td>@customer.MembershipType.DiscountRate%</td>
+                <td>@customer.MembershipType.Name</td>
             </tr>
         }
     </table>

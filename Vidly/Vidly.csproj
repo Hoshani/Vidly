@@ -201,6 +201,34 @@
     <Compile Include="Migrations\201902181211587_populateCustomers.Designer.cs">
       <DependentUpon>201902181211587_populateCustomers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902181238167_AddingNameToMembershipType.cs" />
+    <Compile Include="Migrations\201902181238167_AddingNameToMembershipType.Designer.cs">
+      <DependentUpon>201902181238167_AddingNameToMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181239144_populateMembershipTypeNamesColumn.cs" />
+    <Compile Include="Migrations\201902181239144_populateMembershipTypeNamesColumn.Designer.cs">
+      <DependentUpon>201902181239144_populateMembershipTypeNamesColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181308409_addingBirthDate.cs" />
+    <Compile Include="Migrations\201902181308409_addingBirthDate.Designer.cs">
+      <DependentUpon>201902181308409_addingBirthDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181309528_populateBirthDateValue.cs" />
+    <Compile Include="Migrations\201902181309528_populateBirthDateValue.Designer.cs">
+      <DependentUpon>201902181309528_populateBirthDateValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181323076_AddingMovieGenreAndMoreColumnsInMovie.cs" />
+    <Compile Include="Migrations\201902181323076_AddingMovieGenreAndMoreColumnsInMovie.Designer.cs">
+      <DependentUpon>201902181323076_AddingMovieGenreAndMoreColumnsInMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181323322_populatingGenre.cs" />
+    <Compile Include="Migrations\201902181323322_populatingGenre.Designer.cs">
+      <DependentUpon>201902181323322_populatingGenre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181335297_populatingMovies.cs" />
+    <Compile Include="Migrations\201902181335297_populatingMovies.Designer.cs">
+      <DependentUpon>201902181335297_populatingMovies.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -208,6 +236,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieGenre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
@@ -306,6 +335,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902181211587_populateCustomers.resx">
       <DependentUpon>201902181211587_populateCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181238167_AddingNameToMembershipType.resx">
+      <DependentUpon>201902181238167_AddingNameToMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181239144_populateMembershipTypeNamesColumn.resx">
+      <DependentUpon>201902181239144_populateMembershipTypeNamesColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181308409_addingBirthDate.resx">
+      <DependentUpon>201902181308409_addingBirthDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181309528_populateBirthDateValue.resx">
+      <DependentUpon>201902181309528_populateBirthDateValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181323076_AddingMovieGenreAndMoreColumnsInMovie.resx">
+      <DependentUpon>201902181323076_AddingMovieGenreAndMoreColumnsInMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181323322_populatingGenre.resx">
+      <DependentUpon>201902181323322_populatingGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181335297_populatingMovies.resx">
+      <DependentUpon>201902181335297_populatingMovies.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
