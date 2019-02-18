@@ -1,5 +1,5 @@
-﻿@using Vidly.Models
-@model  Vidly.ViewModels.RandomMovieViewModel
+﻿@using Vidly.Models;
+@model  List<Vidly.Models.Customer>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +8,7 @@
 <h2>Customers</h2>
 
 @{
-    bool isThereCustomers = Model.Customers.Count > 0;
+    bool isThereCustomers = Model.Any();
     string classes = isThereCustomers ? "table table-bordered table-hover" : null;
 }
 
@@ -22,12 +22,14 @@ else
         <tr>
             <th>ID</th>
             <th>Customer Name</th>
+            <th>Discount Rate</th>
         </tr>
-        @foreach (Customer customer in Model.Customers)
+        @foreach (Customer customer in Model)
         {
             <tr>
                 <td>@customer.Id</td>
                 <td>@Html.ActionLink(customer.Name, string.Format("Details/{0}", customer.Id), "Customer")</td>
+                <td>@customer.MembershipType.DiscountRate%</td>
             </tr>
         }
     </table>
