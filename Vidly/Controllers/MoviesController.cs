@@ -29,6 +29,53 @@ namespace Vidly.Controllers
             return _context.Movies.Include(m => m.MovieGenre).ToList();
         }
 
+        public ActionResult New()
+        {
+            MovieFormViewModel viewModel = new MovieFormViewModel
+            {
+                Title = "New Movie",
+                MovieGenres = _context.MovieGenres.ToList()
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+        // GET: Movies/Edit/1
+        // GET: Movies/Edit?id=1
+        public ActionResult Edit(int id)
+        {
+            MovieFormViewModel viewModel = new MovieFormViewModel
+            {
+                Title = "Edit Movie",
+                Movie = _context.Movies.Single(m => m.Id == id),
+                MovieGenres = _context.MovieGenres.ToList()
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                Movie movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+                movieInDb.Name = movie.Name;
+                movieInDb.NumberInStock = movie.NumberInStock;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.DateAdded = movie.DateAdded;
+                movieInDb.MovieGenreId = movie.MovieGenreId;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+        }
+
 
         // GET: Movies
         public ActionResult Index()
@@ -128,13 +175,7 @@ namespace Vidly.Controllers
             return name;
         }
 
-        // GET: Movies/Edit/1
-        // GET: Movies/Edit?id=1
-        // testing a parameter (follows the conventional route {controller}/{action}/{id})
-        public ActionResult Edit(int id)
-        {
-            return Content("id = " + id);
-        }
+
 
         // GET: Movies
         // GET: Movies/Index

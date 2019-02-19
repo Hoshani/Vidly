@@ -229,6 +229,30 @@
     <Compile Include="Migrations\201902181335297_populatingMovies.Designer.cs">
       <DependentUpon>201902181335297_populatingMovies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902191250179_updatingMovie.cs" />
+    <Compile Include="Migrations\201902191250179_updatingMovie.Designer.cs">
+      <DependentUpon>201902191250179_updatingMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191306195_tryingToFixMovieIssue.cs" />
+    <Compile Include="Migrations\201902191306195_tryingToFixMovieIssue.Designer.cs">
+      <DependentUpon>201902191306195_tryingToFixMovieIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191309494_tryingToFixMovieIssueStep2.cs" />
+    <Compile Include="Migrations\201902191309494_tryingToFixMovieIssueStep2.Designer.cs">
+      <DependentUpon>201902191309494_tryingToFixMovieIssueStep2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191328372_tryingToFixMovieIssueStep3.cs" />
+    <Compile Include="Migrations\201902191328372_tryingToFixMovieIssueStep3.Designer.cs">
+      <DependentUpon>201902191328372_tryingToFixMovieIssueStep3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191331256_tryingToFixMovieIssueStep4.cs" />
+    <Compile Include="Migrations\201902191331256_tryingToFixMovieIssueStep4.Designer.cs">
+      <DependentUpon>201902191331256_tryingToFixMovieIssueStep4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191338261_tryingToFixMovieIssueStep5.cs" />
+    <Compile Include="Migrations\201902191338261_tryingToFixMovieIssueStep5.Designer.cs">
+      <DependentUpon>201902191338261_tryingToFixMovieIssueStep5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -239,6 +263,7 @@
     <Compile Include="Models\MovieGenre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
+    <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
   </ItemGroup>
@@ -301,6 +326,7 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -358,6 +384,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902181335297_populatingMovies.resx">
       <DependentUpon>201902181335297_populatingMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191250179_updatingMovie.resx">
+      <DependentUpon>201902191250179_updatingMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191306195_tryingToFixMovieIssue.resx">
+      <DependentUpon>201902191306195_tryingToFixMovieIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191309494_tryingToFixMovieIssueStep2.resx">
+      <DependentUpon>201902191309494_tryingToFixMovieIssueStep2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191328372_tryingToFixMovieIssueStep3.resx">
+      <DependentUpon>201902191328372_tryingToFixMovieIssueStep3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191331256_tryingToFixMovieIssueStep4.resx">
+      <DependentUpon>201902191331256_tryingToFixMovieIssueStep4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191338261_tryingToFixMovieIssueStep5.resx">
+      <DependentUpon>201902191338261_tryingToFixMovieIssueStep5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
