@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
-using System.Data.Entity;
-
 
 namespace Vidly.Controllers
 {
     public class CustomerController : Controller
     {
-
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public CustomerController()
         {
@@ -28,9 +24,10 @@ namespace Vidly.Controllers
 
         public ActionResult New()
         {
-            List<MembershipType> membershipTypes = _context.MembershipTypes.ToList();
+            var membershipTypes = _context.MembershipTypes.ToList();
             CustomerFormViewModel viewModel = new CustomerFormViewModel
             {
+                Customer = new Customer(),
                 MembershipTypes = membershipTypes,
                 Title = "New Customer"
             };
@@ -39,8 +36,20 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                CustomerFormViewModel viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
+
             if (customer.Id == 0)
             {
                 _context.Customers.Add(customer);
@@ -54,6 +63,7 @@ namespace Vidly.Controllers
                 customerInDb.MemberShipTypeId = customer.MemberShipTypeId;
                 customerInDb.IsSubscribedToMonthlyNewsLetter = customer.IsSubscribedToMonthlyNewsLetter;
             }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Customer");
@@ -66,7 +76,7 @@ namespace Vidly.Controllers
             if (customer == null)
                 return HttpNotFound();
 
-            List<MembershipType> membershipTypes = _context.MembershipTypes.ToList();
+            var membershipTypes = _context.MembershipTypes.ToList();
 
             CustomerFormViewModel viewModel = new CustomerFormViewModel
             {
@@ -94,7 +104,7 @@ namespace Vidly.Controllers
 
         private List<Customer> GetCustomers()
         {
-            List<Customer> customers = _context.Customers.Include(c => c.MembershipType).ToList();
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
             return customers;
         }
     }

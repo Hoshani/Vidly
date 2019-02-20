@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
-using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public MoviesController()
         {
@@ -33,7 +32,6 @@ namespace Vidly.Controllers
         {
             MovieFormViewModel viewModel = new MovieFormViewModel
             {
-                Title = "New Movie",
                 MovieGenres = _context.MovieGenres.ToList()
             };
 
@@ -44,10 +42,10 @@ namespace Vidly.Controllers
         // GET: Movies/Edit?id=1
         public ActionResult Edit(int id)
         {
-            MovieFormViewModel viewModel = new MovieFormViewModel
+            Movie movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            MovieFormViewModel viewModel = new MovieFormViewModel(movie)
             {
-                Title = "Edit Movie",
-                Movie = _context.Movies.Single(m => m.Id == id),
                 MovieGenres = _context.MovieGenres.ToList()
             };
 
@@ -55,8 +53,19 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                MovieFormViewModel viewModel = new MovieFormViewModel(movie)
+                {
+                    MovieGenres = _context.MovieGenres.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+
             if (movie.Id == 0)
             {
                 _context.Movies.Add(movie);
@@ -86,7 +95,7 @@ namespace Vidly.Controllers
         // GET: Movies/Details
         public ActionResult Details(int id)
         {
-            return View(GetMovies()[id-1]);
+            return View(GetMovies()[id - 1]);
         }
 
         // GET: Movies/Random
@@ -96,7 +105,7 @@ namespace Vidly.Controllers
         {
             string name = GetARandomMovieName();
 
-            Movie movie = new Movie() { Name = name };
+            Movie movie = new Movie {Name = name};
 
             // you don't have to manually add it here if using only one model
             // View() will take care of it
@@ -114,15 +123,15 @@ namespace Vidly.Controllers
         {
             string name = GetARandomMovieName();
 
-            Movie movie = new Movie() { Name = name };
-            List<Customer> customers = new List<Customer>
+            Movie movie = new Movie {Name = name};
+            var customers = new List<Customer>
             {
-                new Customer{Name = "customer 1"},
-                new Customer{Name = "customer 2"},
-                new Customer{Name = "customer 3"}
+                new Customer {Name = "customer 1"},
+                new Customer {Name = "customer 2"},
+                new Customer {Name = "customer 3"}
             };
 
-            RandomMovieViewModel randomMovieViewModel = new RandomMovieViewModel()
+            RandomMovieViewModel randomMovieViewModel = new RandomMovieViewModel
             {
                 Movie = movie,
                 Customers = customers
@@ -139,7 +148,7 @@ namespace Vidly.Controllers
             string name = GetARandomMovieName();
 
 
-            Movie movie = new Movie() { Name = name };
+            Movie movie = new Movie {Name = name};
 
             // issues:
             // lacks compile time safety
@@ -156,7 +165,7 @@ namespace Vidly.Controllers
         {
             string name = GetARandomMovieName();
 
-            Movie movie = new Movie() { Name = name };
+            Movie movie = new Movie {Name = name};
 
             // issues:
             // Hardcoding strings
@@ -169,12 +178,11 @@ namespace Vidly.Controllers
         private string GetARandomMovieName()
         {
             Random rnd = new Random();
-            List<Movie> movies = GetMovies();
+            var movies = GetMovies();
             int index = rnd.Next(0, movies.Count());
             string name = movies[index].Name;
             return name;
         }
-
 
 
         // GET: Movies
@@ -237,7 +245,7 @@ namespace Vidly.Controllers
         // redirect !!
         public ActionResult Redirect()
         {
-            return RedirectToAction("Index", "Home", new { page = "1", somethingElse = "someString" });
+            return RedirectToAction("Index", "Home", new {page = "1", somethingElse = "someString"});
         }
     }
 }
