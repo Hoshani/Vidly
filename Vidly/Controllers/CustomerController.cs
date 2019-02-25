@@ -91,7 +91,7 @@ namespace Vidly.Controllers
         // GET: Customer
         public ViewResult Index()
         {
-            return View(GetCustomers());
+            return View();
         }
 
         // GET: Customer/Details
